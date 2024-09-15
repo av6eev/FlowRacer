@@ -63,7 +63,7 @@ public class Startup : MonoBehaviour
         
         _gameModel.EnterNicknamePanelModel.Hide();
         _gameModel.LoadingScreenModel.Show();
-        _gameModel.SceneManagementModelsCollection.Load(SceneConst.Game);
+        _gameModel.SceneManagementModelsCollection.Load(SceneConst.Level);
     }
 
     private void Update()

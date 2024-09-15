@@ -1,4 +1,5 @@
-﻿using GameScenes.UI.DebugPanel;
+﻿using Car;
+using GameScenes.UI.DebugPanel;
 using GameScenes.UI.EnterNicknamePanel;
 using Input;
 using Loader.Object;
@@ -21,6 +22,7 @@ public class GameModel : IGameModel
     public ILoadingScreenModel LoadingScreenModel { get; }
     public DebugPanelModel DebugPanelModel { get; set; }
     public EnterNicknamePanelModel EnterNicknamePanelModel { get; set; }
+    public ICarModel CarModel { get; set; }
 
     public GameModel(
         IUpdatersList updatersList,

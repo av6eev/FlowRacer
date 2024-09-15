@@ -1,5 +1,6 @@
-﻿using GameScenes.Arena;
+﻿using GameScenes.Level;
 using GameScenes.UI;
+using Level;
 using Presenter;
 using SceneManagement;
 using Specification.Scene;
@@ -29,8 +30,9 @@ namespace LocationBuilder
                 case SceneConst.Ui:
                     _presenters.Add(new UiScenePresenter(_gameModel, (UiSceneView)sceneView));
                     break;
-                case SceneConst.Game:
-                    _presenters.Add(new GameScenePresenter(_gameModel, (GameSceneView)sceneView));
+                case SceneConst.Level:
+                    var model = new LevelModel(_gameModel.Specifications.LevelSpecifications["1"]);
+                    _presenters.Add(new LevelScenePresenter(_gameModel, model, (LevelSceneView)sceneView));
                     break;
             }
         }
