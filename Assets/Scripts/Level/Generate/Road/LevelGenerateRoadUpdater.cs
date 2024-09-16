@@ -15,9 +15,12 @@ namespace Level.Generate.Road
         private readonly LevelSceneView _sceneView;
 
         private const float WaitCheckTime = .1f;
-        private float _timer;
-
-        private readonly List<PropView> _oldRoads = new();
+        private const float RoadSpawnRate = 3f;
+        private float _checkTimer;
+        private float _spawnTimer;
+        
+        private readonly List<RoadView> _oldRoads = new();
+        private bool _hasMissingRoads;
         
         public LevelGenerateRoadUpdater(ICarModel carModel, LevelModel levelModel, LevelPropPull pull, LevelSceneView sceneView)
         {
@@ -29,15 +32,16 @@ namespace Level.Generate.Road
         
         public void Update(float deltaTime)
         {
-            _timer += deltaTime;
+            _checkTimer += deltaTime;
+            _spawnTimer += deltaTime;
 
-            if (_timer >= WaitCheckTime)
+            if (_checkTimer >= WaitCheckTime)
             {
                 TryUpdateRoad();
                 RemoveOldRoad();
                 SpawnMissingRoad();
                 
-                _timer = 0;
+                _checkTimer = 0;
             }
         }
 
@@ -46,24 +50,25 @@ namespace Level.Generate.Road
             var activeRoadElements = _sceneView.ActiveRoadElements;
             var delta = _pull.Description.MinActiveElementsCount - activeRoadElements.Count;
             
-            if (delta > 0)
+            if (_hasMissingRoads)
             {
-                for (var i = 0; i < delta; i++)
+                if (_spawnTimer >= RoadSpawnRate)
                 {
-                    var element = _pull.Get();
-                    element.transform.position = activeRoadElements[^2].EndPoint.position;
+                    _levelModel.CreateRoadSegment();
                     
-                    activeRoadElements.Add(element);
+                    delta--;
+                    _spawnTimer = 0;
                 }
             }
+
+            _hasMissingRoads = delta > 0;
         }
 
         private void RemoveOldRoad()
         {
             foreach (var road in _oldRoads)
             {
-                _sceneView.ActiveRoadElements.Remove(road);
-                _pull.Put(road);
+                _levelModel.RemoveRoadSegment(road);
             }
             
             _oldRoads.Clear();
@@ -73,7 +78,7 @@ namespace Level.Generate.Road
         {
             foreach (var activeElement in _sceneView.ActiveRoadElements)     
             {
-                if (activeElement.EndPoint.position.z + 30f < _carModel.CurrentPosition.Value.z)
+                if (activeElement.EndPoint.position.z + 200f < _carModel.CurrentPosition.Value.z)
                 {
                     _oldRoads.Add(activeElement);
                 }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using GameScenes.Level;
+﻿using GameScenes.Level;
 using Level.Props;
 using Level.Pull;
 using Presenter;
@@ -37,7 +36,13 @@ namespace Level.Generate.Road
                 return;
             }
 
-            InitInitialRoad();
+            for (var i = 0; i < 1; i++)
+            {
+                HandleRoadCreate();
+            }
+
+            _model.OnRoadCreate += HandleRoadCreate;
+            _model.OnRoadRemove += HandleRoadRemove;
 
             _updater = new LevelGenerateRoadUpdater(_gameModel.CarModel, _model, _pull, _view);
             _gameModel.UpdatersList.Add(_updater);
@@ -45,30 +50,36 @@ namespace Level.Generate.Road
 
         public void Dispose()
         {
+            _model.OnRoadCreate -= HandleRoadCreate;
+            _model.OnRoadRemove -= HandleRoadRemove;
+            
             _view.ActiveRoadElements.Clear();
             _gameModel.UpdatersList.Remove(_updater);
         }
 
-        private void InitInitialRoad()
+        private void HandleRoadRemove(RoadView roadSegment)
         {
-            for (var i = 0; i < FirstActiveElements; i++)
+            _pull.Put(roadSegment);
+            _view.ActiveRoadElements.Remove(roadSegment);
+        }
+
+        private void HandleRoadCreate()
+        {
+            var roadSegment = (RoadView)_pull.Get();
+            var activeRoadElements = _view.ActiveRoadElements;
+            
+            activeRoadElements.Add(roadSegment);
+
+            if (activeRoadElements.Count != 1)
             {
-                var element = _pull.Get();
-
-                var activeRoadElements = _view.ActiveRoadElements;
-                activeRoadElements.Add(element);
-
-                if (activeRoadElements.Count == 1)
-                {
-                    element.transform.position = new Vector3(0, 0, -18f);
-                }
-                else
-                {
-                    element.transform.position = activeRoadElements[i-1].EndPoint.position;
-                }
-                
-                element.Show();
+                roadSegment.transform.position = activeRoadElements[^2].EndPoint.position;
             }
+            else
+            {
+                roadSegment.transform.position = new Vector3(0, 0, -18f);
+            }
+
+            _model.FillRoadSegment(roadSegment);
         }
     }
 }

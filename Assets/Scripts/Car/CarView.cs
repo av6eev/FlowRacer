@@ -16,7 +16,7 @@ namespace Car
 
         public void Move(float speed)
         {
-            Rigidbody.AddForce(Rigidbody.transform.forward * speed);
+            Root.transform.position += Rigidbody.transform.forward * speed;
         }
 
         public void Turn(Vector3 direction)

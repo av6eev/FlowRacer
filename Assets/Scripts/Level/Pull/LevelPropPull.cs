@@ -20,6 +20,7 @@ namespace Level.Pull
             var randomElementIndex = Random.Range(0, Description.Prefabs.Count);
             var element = Description.Prefabs[randomElementIndex];
             var go = Object.Instantiate(element, _root).GetComponent<PropView>();
+            go.Type = Description.Type;
             
             ModifyPutObject(go);
             return go;
@@ -28,6 +29,7 @@ namespace Level.Pull
         protected override void ModifyPutObject(PropView element)
         {
             element.Hide();
+            element.transform.position = new Vector3(0, -50, 0);
         }
 
         protected override void ModifyGetObject(PropView element)

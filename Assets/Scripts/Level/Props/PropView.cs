@@ -1,10 +1,13 @@
+using System;
+using Pulls;
 using UnityEngine;
 
 namespace Level.Props
 {
-    public class PropView : MonoBehaviour
+    public class PropView : MonoBehaviour, IPullObject
     {
-        public Transform EndPoint;
+        public Collider Collider;
+        [NonSerialized] public PropsType Type;
         
         public void Show()
         {

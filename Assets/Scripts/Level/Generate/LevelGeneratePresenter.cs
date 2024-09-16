@@ -1,6 +1,7 @@
 ﻿using GameScenes.Level;
+using Level.Generate.Buildings;
 using Level.Generate.Road;
-using Level.Props;
+using Level.Generate.Trees;
 using Presenter;
 
 namespace Level.Generate
@@ -31,9 +32,11 @@ namespace Level.Generate
 
             pullsCollection.InitAll();
             await pullsCollection.IsInitialized;
-            
+
+            _presenters.Add(new LevelGenerateTreesPresenter(_gameModel, _model));
+            _presenters.Add(new LevelGenerateBuildingsPresenter(_gameModel, _model));
             _presenters.Add(new LevelGenerateRoadPresenter(_gameModel, _model, _view));
-            
+
             _presenters.Init();
         }
 

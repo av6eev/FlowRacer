@@ -10,6 +10,6 @@ namespace GameScenes.Level
     {
         public Transform LevelRoot;
         public CinemachineVirtualCamera Camera;
-        [NonSerialized] public readonly List<PropView> ActiveRoadElements = new();
+        [NonSerialized] public readonly List<RoadView> ActiveRoadElements = new();
     }
 }
