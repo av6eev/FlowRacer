@@ -16,10 +16,10 @@ MonoBehaviour:
     _id: 1
     Pulls:
     - Type: 0
-      InitElementsCount: 45
-      MinActiveElementsCount: 35
+      InitElementsCount: 15
+      MinActiveElementsCount: 5
       Prefabs:
-      - {fileID: 3114196376951164813, guid: 86236f1172563124c8eef205ed74b2e0, type: 3}
+      - {fileID: 7867839479075689445, guid: 77cac49fcad07fe44bfa36d2fc6a5634, type: 3}
       RootGoName: RoadsPull
     - Type: 1
       InitElementsCount: 15
