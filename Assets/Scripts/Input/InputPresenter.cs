@@ -1,4 +1,5 @@
 ﻿using Presenter;
+using UnityEngine;
 
 namespace Input
 {
@@ -20,6 +21,9 @@ namespace Input
             _view.Initialize();
 
             _model.IsEnable.OnChanged += HandleStateChange;
+
+            _view.OnTurnPerformed += HandleTurnPerformed;
+            _view.OnTurnCanceled += HandleTurnCanceled;
         }
 
         public void Dispose()
@@ -27,6 +31,19 @@ namespace Input
             _view.Dispose();
             
             _model.IsEnable.OnChanged -= HandleStateChange;
+            
+            _view.OnTurnPerformed -= HandleTurnPerformed;
+            _view.OnTurnCanceled -= HandleTurnCanceled;
+        }
+
+        private void HandleTurnCanceled()
+        {
+            _model.TurnInput = 0f;
+        }
+
+        private void HandleTurnPerformed(float value)
+        {
+            _model.TurnInput = value;
         }
 
         private void HandleStateChange(bool newValue, bool oldValue)

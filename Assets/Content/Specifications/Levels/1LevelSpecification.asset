@@ -16,18 +16,21 @@ MonoBehaviour:
     _id: 1
     Pulls:
     - Type: 0
-      InitElementsCount: 15
+      InitElementsCount: 45
+      MinActiveElementsCount: 35
       Prefabs:
       - {fileID: 3114196376951164813, guid: 86236f1172563124c8eef205ed74b2e0, type: 3}
       RootGoName: RoadsPull
     - Type: 1
       InitElementsCount: 15
+      MinActiveElementsCount: 0
       Prefabs:
       - {fileID: 2974509412998069902, guid: 71a567bc48688ca4792717bc6799de30, type: 3}
       - {fileID: 7202773521503869341, guid: 46b944c5c736b324db7eeae6392c3fc6, type: 3}
       RootGoName: TreesPull
     - Type: 2
       InitElementsCount: 15
+      MinActiveElementsCount: 0
       Prefabs:
       - {fileID: 3081433636996124277, guid: 6079bdf3d38f4584ea61399a387432f8, type: 3}
       - {fileID: 3325792648785906965, guid: bc21ab680fd33e1459e52cdf3d7a60b8, type: 3}

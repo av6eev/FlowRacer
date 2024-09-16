@@ -8,6 +8,7 @@ namespace Input
         public ReactiveEvent OnDebugPanelToggle { get; } = new();
 
         public ReactiveField<bool> IsEnable { get; } = new(true);
+        public float TurnInput { get; set; }
 
         public void Enable()
         {

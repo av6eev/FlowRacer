@@ -1,11 +1,13 @@
 ﻿using Car.Specification;
 using Reactive.Field;
+using UnityEngine;
 
 namespace Car
 {
     public interface ICarModel
     {
-        ReactiveField<float> CurrentSpeed { get; }
         CarSpecification Specification { get; }
+        ReactiveField<float> CurrentSpeed { get; }
+        ReactiveField<Vector3> CurrentPosition { get; }
     }
 }

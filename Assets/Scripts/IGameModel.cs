@@ -1,4 +1,5 @@
-﻿using GameScenes.UI.DebugPanel;
+﻿using Car;
+using GameScenes.UI.DebugPanel;
 using GameScenes.UI.EnterNicknamePanel;
 using Input;
 using Loader.Object;
@@ -23,4 +24,5 @@ public interface IGameModel : IBaseGameModel
     ILoadingScreenModel LoadingScreenModel { get; }
     DebugPanelModel DebugPanelModel { get; }
     EnterNicknamePanelModel EnterNicknamePanelModel { get; }
+    ICarModel CarModel { get; }
 }

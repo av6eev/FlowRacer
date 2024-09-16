@@ -15,5 +15,9 @@ MonoBehaviour:
   Specification:
     _id: red
     PrefabId: red_car
-    MoveSpeed: 5
-    TurnSpeed: 5
+    MoveSpeed: 3
+    TurnSpeed: 15
+    MaxRotateAngle: 7
+    RotateSpeed: 15
+    CenteringAfterTurnMultiplier: 10
+    TurnSlerpMultiplier: 8

@@ -4,6 +4,7 @@ using Level.Props;
 using Level.Pull;
 using Presenter;
 using UnityEngine;
+using Updater;
 
 namespace Level.Generate.Road
 {
@@ -16,7 +17,7 @@ namespace Level.Generate.Road
         private readonly LevelSceneView _view;
         
         private LevelPropPull _pull;
-        
+        private IUpdater _updater;
 
         public LevelGenerateRoadPresenter(IGameModel gameModel, LevelModel model, LevelSceneView view)
         {
@@ -36,6 +37,20 @@ namespace Level.Generate.Road
                 return;
             }
 
+            InitInitialRoad();
+
+            _updater = new LevelGenerateRoadUpdater(_gameModel.CarModel, _model, _pull, _view);
+            _gameModel.UpdatersList.Add(_updater);
+        }
+
+        public void Dispose()
+        {
+            _view.ActiveRoadElements.Clear();
+            _gameModel.UpdatersList.Remove(_updater);
+        }
+
+        private void InitInitialRoad()
+        {
             for (var i = 0; i < FirstActiveElements; i++)
             {
                 var element = _pull.Get();
@@ -54,11 +69,6 @@ namespace Level.Generate.Road
                 
                 element.Show();
             }
-        }
-
-        public void Dispose()
-        {
-            _view.ActiveRoadElements.Clear();
         }
     }
 }

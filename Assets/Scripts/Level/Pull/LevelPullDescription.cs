@@ -10,6 +10,7 @@ namespace Level.Pull
     {
         public PropsType Type;
         public int InitElementsCount;
+        public int MinActiveElementsCount;
         public List<GameObject> Prefabs;
         public string RootGoName;
     }

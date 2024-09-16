@@ -31,7 +31,11 @@ namespace Car
 
             var component = _loadObjectModel.Result.GetComponent<CarView>();
             _view = Object.Instantiate(component, _levelSceneView.LevelRoot);
-            _view.transform.position = new Vector3(0, 0, 0);
+            _view.SetStartPosition(_model.CurrentPosition.Value);
+            
+            var carRootTransform = _view.Root.transform;
+            _levelSceneView.Camera.Follow = carRootTransform;
+            // _levelSceneView.Camera.LookAt = carRootTransform;
             
             _presenters.Add(new CarMovementPresenter(_gameModel, _model, _view));
             _presenters.Init();
