@@ -47,6 +47,7 @@ namespace Level.Generate.Trees
             foreach (var tree in roadSegment.ActiveProps.Where(element => element.Type == _pull.Description.Type))
             {
                 _pull.Put(tree);
+                toRemoveList.Add(tree);
             }
 
             foreach (var prop in toRemoveList)
