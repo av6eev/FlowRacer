@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &293851215568924364
 Transform:
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0be0cf43c9b454ab8d4c79c2a74ae3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndPoint: {fileID: 0}
   Collider: {fileID: 705906980291797389}
 --- !u!1001 &8888835856416026931
 PrefabInstance:
@@ -118,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 86ddbb41823251c41b2556d64717b363,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

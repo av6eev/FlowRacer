@@ -7,8 +7,7 @@ namespace Level
     {
         public static bool CheckOverlappingWithProps(PropView propElement, Vector3 supposedPosition)
         {
-            var propTransform = propElement.transform;
-            var overlapColliders = Physics.OverlapBox(supposedPosition, propElement.Collider.transform.lossyScale);
+            var overlapColliders = Physics.OverlapBox(supposedPosition, propElement.Collider.transform.localScale);
 
             foreach (var collider in overlapColliders)
             {
@@ -35,6 +34,13 @@ namespace Level
             var randomZ = Random.Range(minZ, maxZ);
 
             return new Vector3(randomX, 0, randomZ);
+        }
+        
+        public static Vector3 GetRandomRotation()
+        {
+            var randomYRotation = Random.Range(0f, 360f);
+
+            return new Vector3(0, randomYRotation,0);
         }
     }
 }

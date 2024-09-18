@@ -65,7 +65,8 @@ namespace Level.Generate.Buildings
             {
                 var building = _pull.Get();
                 var supposedPosition = LevelHelper.GetRandomPosition(roadSegment);
-
+                var supposedRotation = LevelHelper.GetRandomRotation();
+                
                 if (LevelHelper.CheckOverlappingWithProps(building, supposedPosition))
                 {
                     _pull.Put(building);
@@ -73,6 +74,7 @@ namespace Level.Generate.Buildings
                 }
 
                 building.transform.position = supposedPosition;
+                building.transform.rotation = Quaternion.Euler(supposedRotation);
                 roadSegment.ActiveProps.Add(building);
             }
         }

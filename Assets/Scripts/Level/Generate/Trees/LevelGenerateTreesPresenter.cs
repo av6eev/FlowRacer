@@ -64,7 +64,8 @@ namespace Level.Generate.Trees
             {
                 var tree = _pull.Get();
                 var supposedPosition = LevelHelper.GetRandomPosition(roadSegment);
-
+                var supposedRotation = LevelHelper.GetRandomRotation();
+                
                 if (LevelHelper.CheckOverlappingWithProps(tree, supposedPosition))
                 {
                     _pull.Put(tree);
@@ -72,6 +73,7 @@ namespace Level.Generate.Trees
                 }
 
                 tree.transform.position = supposedPosition;
+                tree.transform.rotation = Quaternion.Euler(supposedRotation);
                 roadSegment.ActiveProps.Add(tree);
             }
         }
